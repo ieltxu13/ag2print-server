@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "removeComments": true,
+    "sourceMap": true,
+    "outDir": "app",
+    "rootDir": "server",
+    "moduleResolution": "classic"
+  },
+  "exclude":[
+    "typings/main",
+    "typings/main.d.ts"
+  ]
+}
