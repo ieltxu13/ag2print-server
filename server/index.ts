@@ -27,7 +27,7 @@ app.get('/', function(req: express.Request, res: express.Response) {
 // DEBUG UTILS
 
 app.get('/setup', function(req: express.Request, res: express.Response) {
-  var user = new User({ name: 'ieltxu', password: 'Cucaracha13', email: 'user@appsilon.pl' });
+  var user = new User({ name: 'name', password: 'password', email: 'email@email.com' });
   user.save(function(err) {
     if (err) throw err;
 
