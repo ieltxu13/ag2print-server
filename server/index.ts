@@ -5,6 +5,7 @@ import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 var mongoose = require('mongoose');
 var passport = require('passport');
+var cors = require('cors');
 import * as User from './user/User';
 
 var config = require('./config');
@@ -18,6 +19,7 @@ app.set('dev', 'development');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 app.use('/api', apiRoutes);
 
 app.get('/', function(req: express.Request, res: express.Response) {

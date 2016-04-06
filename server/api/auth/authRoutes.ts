@@ -19,30 +19,31 @@ const authRoutes: express.Router = express.Router();
 // ROUTES
 
 authRoutes.post('/', function(req: express.Request, res: express.Response, next) {
-  if (req.body.credentials) {
-    switch (req.body.credentials) {
-      case 'password':
-        localAuthentication(req, res, next);
+    console.log(req.body)
+    if (req.body.type) {
+        switch (req.body.type) {
+            case 'password':
+                localAuthentication(req, res, next);
+        }
+    } else {
+        return res.status(403).send({
+            message: 'credentials not provided'
+        });
     }
-  } else {
-    return res.status(403).send({
-      message: 'credentials not provided'
-    });
-  }
 });
 
 function localAuthentication(req: express.Request, res: express.Response, next) {
-  passport.authenticate('local', function(err, user, info) {
-    if (err) { return next(err) }
-    if (!user) {
-      return res.json(401, { error: 'message' });
-    }
+    passport.authenticate('local', function(err, user, info) {
+        if (err) { return next(err) }
+        if (!user) {
+            return res.json(401, { error: 'message' });
+        }
 
-    //user has authenticated correctly thus we create a JWT token
-    var token = jwt.sign({ name: user.name, email: user.email }, config.secret);
-    res.json({ token: token });
+        //user has authenticated correctly thus we create a JWT token
+        var token = jwt.sign({ name: user.name, email: user.email }, config.secret);
+        res.json({ token: token });
 
-  })(req, res, next);
+    })(req, res, next);
 }
 
 export = authRoutes;
