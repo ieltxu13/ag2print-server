@@ -10,17 +10,18 @@ export function create(req: express.Request, res: express.Response) {
     password: req.body.password,
     email: req.body.email
   });
-  user.save((error, user) => {
+  user.save((error, user: IUser) => {
     if (error) {
       res.send(500);
     } else {
-      res.status(200).json(user);
+      console.log({id: user._id, name: user.name, email: user.email})
+      res.status(201).json({id: user._id, name: user.name, email: user.email});
     }
   });
 }
 
 export function getUsers(req: express.Request, res: express.Response) {
-  User.find({}, 'name email', (error, users) => {
+  User.find({}, 'id name email', (error, users) => {
     if (error) {
       res.send(500);
     }
