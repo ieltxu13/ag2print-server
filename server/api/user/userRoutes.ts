@@ -9,6 +9,7 @@ var config = require('./../auth/config');
 
 const userRoutes: express.Router = express.Router();
 
+userRoutes.post('/', userController.create);
 // route middleware to verify a token
 userRoutes.use(function(req, res, next) {
 
@@ -42,6 +43,5 @@ userRoutes.use(function(req, res, next) {
 
 userRoutes.get('/', userController.getUsers);
 userRoutes.get('/:id', userController.getUser);
-userRoutes.post('/', userController.create);
 
 export = userRoutes;
