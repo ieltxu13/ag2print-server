@@ -16,7 +16,7 @@ userRoutes.use(function(req, res, next) {
   var token = req.headers['authorization'];
   // decode token
   if (token) {
-    token.replace('Bearer ', '')
+    var token = token.replace('Bearer ', '')
     // verifies secret and checks exp
     jwt.verify(token, config.secret, function(err, decoded) {
       if (err) {

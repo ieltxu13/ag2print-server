@@ -20,7 +20,7 @@ export function create(req: express.Request, res: express.Response) {
 }
 
 export function getUsers(req: express.Request, res: express.Response) {
-  User.find((error, users) => {
+  User.find({}, 'name email', (error, users) => {
     if (error) {
       res.send(500);
     }

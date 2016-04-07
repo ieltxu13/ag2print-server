@@ -38,14 +38,6 @@ app.get('/setup', function(req: express.Request, res: express.Response) {
   })
 });
 
-app.get('/users', function(req: express.Request, res: express.Response) {
-  User.find(function(err, users) {
-    if (err) return res.json({error: err});
-
-    res.json({users: users});
-  })
-})
-
 app.listen(8080);
 
 export default app;

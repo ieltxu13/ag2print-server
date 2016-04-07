@@ -26,7 +26,7 @@ authRoutes.post('/', function(req: express.Request, res: express.Response, next)
                 localAuthentication(req, res, next);
         }
     } else {
-        return res.status(403).send({
+        return res.status(401).send({
             message: 'credentials not provided'
         });
     }
@@ -34,9 +34,10 @@ authRoutes.post('/', function(req: express.Request, res: express.Response, next)
 
 function localAuthentication(req: express.Request, res: express.Response, next) {
     passport.authenticate('local', function(err, user, info) {
+        console.log(err, user, info);
         if (err) { return next(err) }
         if (!user) {
-            return res.json(401, { error: 'message' });
+          return res.json(401, { error: info.message });
         }
 
         //user has authenticated correctly thus we create a JWT token
