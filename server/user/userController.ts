@@ -12,7 +12,7 @@ export function create(req: express.Request, res: express.Response) {
   });
   user.save((error, user: IUser) => {
     if (error) {
-      res.send(500);
+      res.status(500).json(error);
     } else {
       console.log({id: user._id, name: user.name, email: user.email})
       res.status(201).json({id: user._id, name: user.name, email: user.email});
